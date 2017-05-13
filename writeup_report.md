@@ -11,7 +11,7 @@ The goals / steps of this project are the following:
 
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-###Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
+### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
 
 ---
 
@@ -26,7 +26,7 @@ lines 57-63.
 
 I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
 
-Vehicle                  |  Undistorted
+Vehicle                  |  Non Vehicle
 :----------------------------:|:------------------------------:
 ![Vehicle](./output_images/vehicle.png)| ![Non-Vehicle](./output_images/nonvehicle.png)
 
@@ -67,7 +67,7 @@ To extract features I used spatial binning, color histograms and HOG features. I
 them into a large feature vector and used `sklearn.StandardScaler` to normalize my data. I fed
 this data into the svm classifier and used default parameters.
 
-###Sliding Window Search
+### Sliding Window Search
 
 #### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
@@ -100,12 +100,12 @@ Ultimately I searched on three scales using YCrCb 3-channel HOG features plus sp
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 
 Here's a [link to my video result](./video.mp4)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
@@ -116,7 +116,6 @@ Here is a a video frame and its corresponding heatmap, label and bounding box im
 Image                 |  Heatmap     | label() function | Bounding Box
 :--------------------:|:------------:|:----------------:|:--------------:
 ![Image](./output_images/test4.png)| ![Heatmap](./output_images/heat4.png) | ![Label](./output_images/label4.png) | ![Bounding Box](./output_images/bbox4.png)
-![Image](./output_images/test5.png)| ![Heatmap](./output_images/heat5.png) | ![Label](./output_images/label5.png) | ![Bounding Box](./output_images/bbox5.png)
 ![Image](./output_images/test6.png)| ![Heatmap](./output_images/heat6.png) | ![Label](./output_images/label6.png) | ![Bounding Box](./output_images/bbox6.png)
 
 
@@ -127,9 +126,9 @@ I then apply a threshold to this cumulative total.
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 
 This project is mainly made of two parts: (1) train an SVM classifier to detect vehicle or non vehicle
